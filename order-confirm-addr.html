@@ -159,7 +159,8 @@
 							<div id="setAddrId" addrid = {{address.id}}>
 								<p>{{address.fullname}}</p>
 								<p>{{address.phone}}</p>
-								<span>{{address.region}} {{address.region_detail}}</span>
+								<p><span>{{address.region}}</span></p>
+								<p><span>{{address.region_detail}}</span></p>
 							</div>
 						</div>
 						<a class="change-add" id="changeAddBtn">Change Address</a>
@@ -238,7 +239,8 @@
 				<li class="mui-table-view-cell" addrid="{{val.id}}">
 					<p>{{val.fullname}}</p>
 					<p>{{val.phone}}</p>
-					<p>{{val.region}} {{val.region_detail}}</p>
+					<p>{{val.region}}</p>
+					<p>{{val.region_detail}}</p>
 				</li>
 			{{/each}}
 		</ul>
@@ -248,7 +250,8 @@
 		<div id="setAddrId" addrid = {{id}}>
 			<p>{{fullname}}</p>
 			<p>{{phone}}</p>
-			<p>{{region}} {{region_detail}}</p>
+			<p><span>{{region}}</span></p>
+			<p><span>{{region_detail}}</span></p>
 		</div>	
 	</script>
 	<script id="singleaddrTemplate2" type="text/html">
@@ -256,7 +259,8 @@
 			<div id="setAddrId" addrid = {{id}}>
 				<p>{{fullname}}</p>
 				<p>{{phone}}</p>
-				<p>{{region}} {{region_detail}}</p>
+				<p><span>{{region}}</span></p>
+				<p><span>{{region_detail}}</span></p>
 			</div>
 		</div>
 		<a class="change-add" id="changeAddBtn">Change Address</a>

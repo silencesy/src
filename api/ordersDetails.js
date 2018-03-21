@@ -123,6 +123,7 @@
     }     
         return null;
     }
+    
     // 获取订单数量
     function GetRequest() {
 	var url = location.search; //获取url中"?"符后的字串

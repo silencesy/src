@@ -282,7 +282,8 @@
             var name = document.getElementById('name').value;
             var theNumber = document.getElementById('number').value;
             // var cityResult3 = document.getElementById('cityResult3').value;
-            var theTextarea = document.getElementById('textarea').value;
+            var theTextareaC = document.getElementById('textareaC').value;
+            var theTextareaE = document.getElementById('textareaE').value;
             var checkDeafultFlag = ($('#checkDeafult').is(':checked') == false)?0:1;
             console.log(checkDeafultFlag);
 

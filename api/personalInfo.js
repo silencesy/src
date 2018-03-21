@@ -179,24 +179,24 @@
         $('.info-popup-backdrop').show();
         console.log($('.info-popup'));
     });
-    document.getElementById("info-cancel").addEventListener('tap',function(){
+
+    mui('body').on('tap','#info-cancel',function(e){
         $('.info-popup').hide();
         $('.info-popup-backdrop').hide();
-        console.log($('.info-popup'));
     });
-
-    document.getElementById("info-done").addEventListener('tap',function(){
-
+    mui('body').on('tap','#info-done',function(e){
         var pas1 = document.getElementById("pas1").value;
         var pas2 = document.getElementById("pas2").value;
         var reg = /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/g;
+        var token = localStorage.getItem("token");
         if(pas1 == '') {
             mui.toast("Please enter your original password!");
-        }  else if (!reg.test($("#pas2").val())){
-            mui.toast("The new password with 6-16 digits (numbers and letters)!");
+        } else if ( pas2 == '') {
+            mui.toast("Please enter your new password!");
+        } else if (!reg.test($("#pas2").val())){
+            mui.toast("Please enter new password with 6-16 digits (numbers and letters)!");
             // $("#pas2").focus();
         } else {
-            var token = localStorage.getItem("token");
             $.ajax({
                 beforeSend: function(request) {
                     request.setRequestHeader("TOKEN",token);
@@ -210,20 +210,21 @@
                     mui.toast("The original password is incorrect!");
                     return false;
                 } else if (data.code == 1) {
-                        mui.toast('Successfully!'); 
-                        $('.info-popup').hide();
-                        $('.info-popup-backdrop').hide();
-                    } else {
+                    mui.toast('Successfully!'); 
+                    $('.info-popup').hide();
+                    $('.info-popup-backdrop').hide();
+                } else {
                     mui.toast("Network error, please try again!");
-                    }
+                }
             })
             .fail(function() {
                 mui.toast("Network error, please try again!");
             })
           
-        }
-               
+        }   
     });
+        
+               
 
     // 获取用户信息
     function getUserInfo () {

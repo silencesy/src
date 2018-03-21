@@ -1,5 +1,5 @@
 (function(mui) {
-    var searchInfo = getUrlParam("searchdata");
+    var searchInfo = getUrlParam("searchdata") || "All Shops";
     $('title').text(searchInfo);
     $('.iconfont.icon-sousuo').on('click',function(){
         var shopSearchInfo = $('#selfShopSearch').val();

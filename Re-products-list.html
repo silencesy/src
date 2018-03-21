@@ -39,17 +39,18 @@
 	<script src="./static/js/template.js"></script>
 	<script id="categorys" type="text/html">
 	    {{each categorysList as val}}
-	    	<li class="waterfall">
+			<li class="waterfall">
 				<a href="product-detail.html?productid={{val.set_id}}">
 					<img class="lazy" src="{{val.set_img}}" />
 					<p>{{val.goods_name}}</p>
 				</a>
+				<p class="sales-count">Sales volume : {{val.sale_count}}</p>
 				{{if val.goods_sale_price}}
 				<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
 				{{else}}
 				<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
 				{{/if}}
-				<span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span>
+				<!-- <span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span> -->
 				
 			</li>
 	    {{/each}}

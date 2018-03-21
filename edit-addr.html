@@ -31,13 +31,14 @@
 					<input type="text"  id="number" placeholder="" >
 				</div>				
 				<!-- 三级联动开始 -->
-	    		<div id="showCityPicker3" class="mui-input-row">
+	    		<!-- <div id="showCityPicker3" class="mui-input-row">
 	    			<label class="region">Select&nbsp;region：</label>
 	    			<input type="" name="" id="cityResult3" value="" />
 	    			
-	    		</div>
+	    		</div> -->
 	    		<!-- 三级联动结束 -->
-	    		<textarea id="textarea" rows="5" placeholder="Please fill in the details"></textarea>
+	    		<textarea id="textareaC" rows="5" placeholder="* Please write down your detailed address in Chinese"></textarea>
+	    		<textarea id="textareaE" rows="5" placeholder="Please write down your detailed address in English"></textarea>
 			</div> 
 		</div>
 	</div>
@@ -51,14 +52,8 @@
 			<label>Phone&nbsp;number：</label>
 			<input type="text"  id="number" placeholder="" value="{{phone}}">
 		</div>				
-		<!-- 三级联动开始 -->
-		<div id="showCityPicker3" class="mui-input-row">
-			<label class="region">Select&nbsp;region：</label>
-			<input type="" name="" id="cityResult3" value="{{region}}" />
-			
-		</div>
-		<!-- 三级联动结束 -->
-		<textarea id="textarea" rows="5" placeholder="Please fill in the details">{{region_detail}}</textarea>
+		<textarea id="textareaC" rows="5">{{region}}</textarea>
+		<textarea id="textareaE" rows="5">{{region_detail}}</textarea>
 	</script>
 	<script src="./api/testOrFormal.js"></script>
 	<script src="./static/js/mui.min.js"></script>

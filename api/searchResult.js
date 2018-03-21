@@ -1,6 +1,12 @@
 (function(mui) {
-    var searchInfo = getUrlParam("searchdata") || "All Shops";
-    $('title').text(searchInfo);
+    var searchInfo = getUrlParam("searchdata");
+    console.log(searchInfo);
+    if (searchInfo == '') {
+        $('title').text("All Shops");
+    } else {
+        $('title').text(searchInfo);
+    }
+    
     $('.iconfont.icon-sousuo').on('click',function(){
         var shopSearchInfo = $('#selfShopSearch').val();
         if (shopSearchInfo == '') {

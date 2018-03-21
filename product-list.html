@@ -43,8 +43,8 @@
 	<script id="categorys" type="text/html">
 	    {{each categorysList as val}}
 	    	<li class="waterfall">
-				<a href="product-detail.html?productid={{val.id}}">
-					<img class="lazy" src="{{val.coverpic}}" />
+				<a href="product-detail.html?productid={{val.set_id}}">
+					<img class="lazy" src="{{val.set_img}}" />
 					<p>{{val.goods_name}}</p>
 				</a>
 				<p class="sales-count">Sales volume : {{val.sale_count}}</p>

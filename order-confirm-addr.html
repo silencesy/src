@@ -26,6 +26,13 @@
 			margin-top: 10px;
 			display: none;
 		}
+		.coupons-line {
+			height: 41px;
+			background-color: #fff;
+			line-height: 41px;
+			padding: 0 15px;
+			margin-bottom: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -227,6 +234,15 @@
 					{{/if}}
 				{{/each}}
 			</ul>
+			{{if coupon.reduce}}
+			<div class="coupons-line">
+				<span class="fr">Total:<em style="color: #f6442b;margin-left: 5px;">￥{{coupon.total}}</em> </span>
+			</div>
+			<div class="coupons-line">
+				<span>{{coupon.reduce.id.coupon_name}}</span>
+				<span class="fr" style="color: #f6442b;">-￥{{coupon.reduce.id.reduce_money}}</span>
+			</div>
+			{{/if}}
 			</div>
 			<footer class="footer-order">
 				<div class="total">Total:￥<span class="sumNumber">{{total}}</span></div>

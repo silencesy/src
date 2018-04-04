@@ -10,7 +10,15 @@
 	<link rel="stylesheet" href="./static/css/style.css">
 	<!-- 字体图标 -->
 	<link rel="stylesheet" href="http://at.alicdn.com/t/font_493593_17fvegvu6w7y14i.css">
-
+	<style>
+		.coupons-line {
+			height: 41px;
+			background-color: #fff;
+			line-height: 41px;
+			padding: 0 15px;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div class="layout">
@@ -131,6 +139,15 @@
 					</li>
 				{{/each}}
 			</ul>
+			{{if coupon.reduce}}
+			<div class="coupons-line">
+				<span class="fr">Total:<em style="color: #f6442b;margin-left: 5px;">￥{{coupon.total}}</em> </span>
+			</div>
+			<div class="coupons-line">
+				<span>{{coupon.reduce.id.coupon_name}}</span>
+				<span class="fr" style="color: #f6442b;">-￥{{coupon.reduce.id.reduce_money}}</span>
+			</div>
+			{{/if}}
 		</div>
 		
 		<footer class="footer-order">

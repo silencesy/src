@@ -3,6 +3,12 @@
 	mui('.mui-bar').on('tap','#homePage',function(){
 	    window.location.href = './index.html'
 	});
+	mui('.mui-bar').on('tap','#Categories',function(){
+	    window.location.href = './all-categorys.html?categoryid=0'
+	});
+	mui('.mui-bar').on('tap','#Guide',function(){
+	    window.location.href = './article-list.html'
+	});
 	mui('.mui-bar').on('tap','#carPage',function(){
 		isLogin('cart.html','cart');
 	});

@@ -9,6 +9,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="stylesheet" href="./static/css/mui.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xye57roo0uul3di.css">
         <style>
            
             .mui-bar~.mui-content .mui-fullscreen {
@@ -110,6 +112,9 @@
             .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
                 border-bottom: none;
             }
+            .mui-fullscreen .mui-segmented-control~.mui-slider-group {
+                bottom: 50px;
+            }
             #sliderSegmentedControl .mui-control-item.mui-active {
                 border-bottom: 1px solid #f6442b;
             }
@@ -119,11 +124,33 @@
         </style>
     </head>
     <body>
+        <nav class="mui-bar mui-bar-tab" id="bottomBar">
+            <a class="mui-tab-item" id="homePage">
+                <span class="mui-icon iconfont icon-shanghu1"></span>
+                <span class="mui-tab-label">Home</span>
+            </a>
+            <a class="mui-tab-item" id="Categories">
+                <span class="mui-icon iconfont icon-fenlei1"></span>
+                <span class="mui-tab-label">Categories</span>
+            </a>
+            <a class="mui-tab-item" id="Guide">
+                <span class="mui-icon iconfont icon-wenzhang"></span>
+                <span class="mui-tab-label">Guide</span>
+            </a>
+            <a class="mui-tab-item" id="carPage">
+                <span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+                <span class="mui-tab-label">Cart</span>
+            </a>
+            <a class="mui-tab-item" id="mePage">
+                <span class="mui-icon iconfont icon-me"></span>
+                <span class="mui-tab-label">My Account</span>
+            </a>
+        </nav>
         <div class="layout orders-layout">
             <div class="mui-content ">
                 <div id="slider" class="mui-slider mui-fullscreen">
                     <div id="sliderSegmentedControl" class=" mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                            <a class="mui-control-item mui-active" href="#item1mobile">
+                            <a class="mui-control-item" href="#item1mobile">
                                 All
                             </a>
                             <a class="mui-control-item" href="#item2mobile">
@@ -975,6 +1002,7 @@
         <script src="./static/js/mui.min.js"></script>
         <script src="./static/js/mui.pullToRefresh.js"></script>
         <script src="./static/js/mui.pullToRefresh.material.js"></script>
+        <script src="./api/isLogin.js"></script>
         <script>
             
             (function(mui) {
@@ -1008,7 +1036,7 @@
                             up: {
                                 auto:true,
                                 contentrefresh : "Loading…",
-                                contentdown: 'Pull up to load more',
+                                contentdown: '',
                                 contentnomore:'No more data',
                                 callback: function() {
                                     var self = this;

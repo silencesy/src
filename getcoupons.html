@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>th-Coupons</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+	<style>
+		body {
+			background-color: #fff;
+		}
+		.table-card .tab-container >ul {
+			background: rgba(0,0,0,0);
+			
+		}
+		.mui-coupons-content .login-code input {
+			border: 1px solid rgba(0,0,0,0);
+		}
+		.mui-coupons-content .login-code {
+			float: left;
+    		width: 68%;
+		}
+		.mui-coupons-content #newList > .clearfix {
+			padding: 0 15px;
+		}
+		.mui-coupons-content .login-btn {
+			padding: 0;
+		    float: left;
+		    padding-left: 15px;
+		    box-sizing: border-box;
+		    width: 32%;
+		}
+		.mui-coupons-content .login-btn button {
+   			padding: 6px 15px;
+   			background: #b8b8b8;
+   			height: 39px;
+   			width: 100%;
+		}
+		.coupons-card > div {
+			background: #fff;
+			padding: 15px;
+		}
+		.coupons-card .card-up {
+			background: #fce6e3;
+			position: relative;
+			font-size: 14px;
+			padding: 10px;
+		}  
+		.coupons-card .card-up-o {
+			background: #e4e4e4;
+		}
+		.coupons-card .card-up em {
+			font-size: 26px;
+			font-weight: 600;
+		}
+		.coupons-card .card-up > div > span {
+			float: left;
+			width: 17%;
+			padding-top: 11px;
+		}
+		.coupons-card .card-up > div > p {
+			float: left;
+			line-height: 44px;
+		}
+		.coupons-card .card-up > div > a {
+			float: left;
+			width: 27%;
+			background: #f6442b;
+			color: #fff;
+			padding: 3px 3px;
+			margin-top: 9px;
+    		border-radius: 3px;
+    		text-align: center;
+		}
+		.coupons-card .card-up > div > .card-a-o {
+			background: #b8b8b8;
+		}
+		.coupons-card .card-up b {
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.coupons-card .card-down {
+			background: #fea598;
+			color: #fff;
+			padding: 10px;
+			overflow: hidden;
+			font-size: 14px;
+		}
+		.coupons-card .card-down-o {
+			background: #b8b8b8;
+		}
+		.coupons-card .card-down span:nth-of-type(1) {
+			float: left;
+		}
+		.coupons-card .card-down span:nth-of-type(2) {
+			float: right;
+		}
+		.coupons-card .card-up img {
+			position: absolute;
+			width: 100%;
+		    bottom: 0;
+		    right: 0;
+		}
+		.table-card .tab-con {
+			padding-top: 0px;
+		}
+		.get-btn {
+			display: inline-block;
+			width: 50%;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			color: #fff;
+			background-color: #f6442b;
+			margin: 0 auto;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout favourite-layout">
+		<div class="mui-content mui-coupons-content">
+		    <div class="table-card">
+		        <div class="tab-con">
+		            <div class="tab-on products tab-container">
+		                <ul class="save-pro-ul" id="newList">
+							<div class="coupons-card">
+								<div>
+									<div class="card-up">
+										<div class="clearfix">
+											<span style="color: #f6442b;">¥<em> 50</em></span>	 
+											<p>
+												<span>Avalible for consumption above ¥ 99</span>
+											</p>
+										</div>
+										<img src="./static/images/line.jpg" alt="">
+									</div>
+									<div class="card-down">
+										<span>2018.03.29－2018.04.30</span>
+										<span>Specified goods</span>
+									</div>
+								</div>
+							</div>
+		                </ul>
+		     			<div style="text-align: center; background-color: #fff;">
+		     				<span class="get-btn">Get th-Coupons</span>
+		     			</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<script src="api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script>
+		(function(mui) {
+			$('.get-btn').on('click',function() {
+				var token = window.localStorage.getItem('token') || null;
+				$.ajax({
+					beforeSend: function(request) {
+		                request.setRequestHeader("TOKEN", token);
+		            },
+					url: csOrzs + '/Api/Coupon/getCoupon',
+					type: 'POST',
+					data: {
+						code: '28c8edde3d61a0411511d3b1866f0636'
+					}
+				})
+				.done(function(data) {
+					// 没有登录
+					if (data.code == 0) {
+						if (csOrzs == 'http://proj7.thatsmags.com') {
+							window.location.href='http://proj9.thatsmags.com/login.html';
+						} else {
+							window.location.href='http://mob.thmart.com.cn/login.html?';
+						}
+					// 领取成功
+					} else if (data.code == 1) {
+						mui.toast("Successful!");
+						setTimeout(function() {
+							if (csOrzs == 'http://proj7.thatsmags.com') {
+								window.location.href='http://proj9.thatsmags.com';
+							} else {
+								window.location.href='http://mob.thmart.com.cn';
+							}
+						},1000);
+					} else if (data.code == -2) {
+						mui.toast("Sorry, you already got the coupon!");
+						setTimeout(function() {
+							if (csOrzs == 'http://proj7.thatsmags.com') {
+								window.location.href='http://proj9.thatsmags.com';
+							} else {
+								window.location.href='http://mob.thmart.com.cn';
+							}
+						},4000);
+					} else if (data.code == -3) {
+						mui.toast("Sorry, the coupon box is empty! More promotion events are coming soon!");
+						setTimeout(function() {
+							if (csOrzs == 'http://proj7.thatsmags.com') {
+								window.location.href='http://proj9.thatsmags.com';
+							} else {
+								window.location.href='http://mob.thmart.com.cn';
+							}
+						},4000);
+					}
+				})
+				.fail(function() {
+					mui.toast("Network error, please try again!");
+				});
+				
+			});
+		})(mui);
+	</script>
+</body>
+</html>

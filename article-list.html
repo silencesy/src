@@ -9,6 +9,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="stylesheet" href="./static/css/mui.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xye57roo0uul3di.css">
         <style>
            
             .mui-bar~.mui-content .mui-fullscreen {
@@ -119,10 +121,36 @@
             .mui-table-view-cell {
                 background-color: #fff;
             }
+            #slider > div {
+                margin-bottom: 50px;
+            }
         </style>
     </head>
     <body>
+         <nav class="mui-bar mui-bar-tab" id="bottomBar">
+            <a class="mui-tab-item" id="homePage">
+                <span class="mui-icon iconfont icon-shanghu1"></span>
+                <span class="mui-tab-label">Home</span>
+            </a>
+            <a class="mui-tab-item" id="Categories">
+                <span class="mui-icon iconfont icon-fenlei1"></span>
+                <span class="mui-tab-label">Categories</span>
+            </a>
+            <a class="mui-tab-item mui-active" id="Guide">
+                <span class="mui-icon iconfont icon-wenzhang"></span>
+                <span class="mui-tab-label">Guide</span>
+            </a>
+            <a class="mui-tab-item" id="carPage">
+                <span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+                <span class="mui-tab-label">Cart</span>
+            </a>
+            <a class="mui-tab-item" id="mePage">
+                <span class="mui-icon iconfont icon-me"></span>
+                <span class="mui-tab-label">My Account</span>
+            </a>
+        </nav>
         <div class="layout orders-layout">
+            
             <div class="mui-content ">
                 <div id="slider" class="mui-slider mui-fullscreen">
                     <div id="sliderSegmentedControl" class=" mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -200,10 +228,11 @@
                 <a href="article-details.html?articlesid={{val.id}}">
                     <li class="mui-table-view-cell">
                         <div class="home-pick-img">
-                            <img src="{{val.coverpic}}" alt="">
+                            <img data-lazyload="{{val.coverpic}}" alt="">
                         </div>
                         <div class="home-pick-info">
                             <p>{{val.article_name}}</p>
+                            <p class="descript" >{{val.description}}</p>
                             <em class="date">{{val.create_time}}</em>
                         </div>
                     </li>
@@ -214,6 +243,9 @@
         <script src="./static/js/jquery.min.js"></script>
         <script src="./static/js/template.js"></script>
         <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/mui.lazyload.js"></script>
+        <script src="./static/js/mui.lazyload.img.js"></script>
+        <script src="./api/isLogin.js"></script>
         <script src="./static/js/mui.pullToRefresh.js"></script>
         <script src="./static/js/mui.pullToRefresh.material.js"></script>
         <script>
@@ -222,6 +254,11 @@
 
                 mui.init({
                     swipeBack: false
+                });
+                // 图片懒加载
+                var lazyLoad = mui("#bigbox").imageLazyload({
+                    placeholder: 'http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg',
+                    destroy: false
                 });
 
                 //阻尼系数
@@ -240,12 +277,12 @@
                             up: {
                                 auto:true,
                                 contentrefresh : "Loading…",
-                                contentdown: 'Pull up to load more',
+                                contentdown: '',
                                 contentnomore:'No more data',
                                 callback: function() {
                                     var self = this;
                                     if (index == 0) {
-                                        createFragment0 (index,self)
+                                        createFragment0 (index,self);
                                     }
                                     if (index == 1) {
                                         createFragment1 (index,self)
@@ -256,7 +293,7 @@
                                     if (index == 3) {
                                         createFragment3 (index,self)
                                     }
-                                }
+                                }   
                             }
                         });
                     });
@@ -278,6 +315,7 @@
                             var articelsList2 = {"articelsList":articleListData};
                             var articleListHtml = template('articels', articelsList2);
                             $('#one').append(articleListHtml);
+                            lazyLoad.refresh(true);
                             self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
                         })
                         .fail(function() {
@@ -306,6 +344,7 @@
                             var articelsList2 = {"articelsList":articleListData};
                             var articleListHtml = template('articels', articelsList2);
                             $('#two').append(articleListHtml);
+                            lazyLoad.refresh(true);
                             self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
                         })
                         .fail(function() {
@@ -332,6 +371,7 @@
                             var articelsList2 = {"articelsList":articleListData};
                             var articleListHtml = template('articels', articelsList2);
                             $('#three').append(articleListHtml);
+                            lazyLoad.refresh(true);
                             self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
                         })
                         .fail(function() {
@@ -357,6 +397,7 @@
                             var articelsList2 = {"articelsList":articleListData};
                             var articleListHtml = template('articels', articelsList2);
                             $('#four').append(articleListHtml);
+                            lazyLoad.refresh(true);
                             self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
                         })
                         .fail(function() {

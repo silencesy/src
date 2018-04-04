@@ -9,17 +9,23 @@
         <link rel="stylesheet" href="./static/css/mui.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
         <!-- 字体图标 -->
-        <!-- 字体图标 -->
-        <!-- 字体图标 -->
-        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_y2nyratgm34n29.css">
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_rpvkogoof88e61or.css">
     </head>
 
     <body>
         <div class="layout personal-layout">
-            <nav class="mui-bar mui-bar-tab">
+            <nav class="mui-bar mui-bar-tab" id="bottomBar">
                 <a class="mui-tab-item" id="homePage">
                     <span class="mui-icon iconfont icon-shanghu1"></span>
                     <span class="mui-tab-label">Home</span>
+                </a>
+                <a class="mui-tab-item" id="Categories">
+                    <span class="mui-icon iconfont icon-fenlei1"></span>
+                    <span class="mui-tab-label">Categories</span>
+                </a>
+                <a class="mui-tab-item" id="Guide">
+                    <span class="mui-icon iconfont icon-wenzhang"></span>
+                    <span class="mui-tab-label">Guide</span>
                 </a>
                 <a class="mui-tab-item" id="carPage">
                     <span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
@@ -27,11 +33,7 @@
                 </a>
                 <a class="mui-tab-item mui-active" id="mePage">
                     <span class="mui-icon iconfont icon-me"></span>
-                    <span class="mui-tab-label">Me</span>
-                </a>
-                <a class="mui-tab-item" id="morePage">
-                    <span class="mui-icon iconfont icon-iconfonthome"></span>
-                    <span class="mui-tab-label">More</span>
+                    <span class="mui-tab-label">My Account</span>
                 </a>
             </nav>
             <div class="mui-content">
@@ -86,10 +88,16 @@
                                 <div class="mui-media-body">Wishlist</div>
                             </a>
                         </li>
-                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                        <!-- <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
                             <a href="./invoice-list.html">
                                 <span class="mui-icon iconfont icon-fapiao"></span>
                                 <div class="mui-media-body">Invoice Info</div>
+                            </a>
+                        </li> -->
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./coupons-list.html">
+                                <span class="mui-icon iconfont icon-youhuiquan"></span>
+                                <div class="mui-media-body">th-Coupons</div>
                             </a>
                         </li>
                         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
@@ -117,19 +125,19 @@
         <script id="statusTemplate" type="text/html">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
                 <a href="./orders.html?show=item2mobile">
-                    <span class="mui-icon iconfont icon-daifukuan"> <span class="mui-badge"></span><span class="mui-badge">{{amount[0]}}</span></span>
+                    <span class="mui-icon iconfont icon-daifukuan"> <span class="mui-badge"></span><span class="mui-badge">{{if amount[0] != 0}}{{amount[0]}}{{/if}}</span></span>
                     <div class="mui-media-body">Unpaid</div>
                 </a>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
                 <a href="./orders.html?show=item3mobile">
-                    <span class="mui-icon iconfont icon-fahuo"><span class="mui-badge"></span><span class="mui-badge">{{amount[1]}}</span></span>
+                    <span class="mui-icon iconfont icon-fahuo"><span class="mui-badge"></span><span class="mui-badge">{{if amount[1] != 0}}{{amount[1]}}{{/if}}</span></span>
                     <div class="mui-media-body">Paid</div>
                 </a>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
                 <a href="./orders.html?show=item4mobile">
-                    <span class="mui-icon iconfont icon-daishouhuo"><span class="mui-badge">{{amount[2]}}</span></span>
+                    <span class="mui-icon iconfont icon-daishouhuo"><span class="mui-badge">{{if amount[2] != 0}}{{amount[2]}}{{/if}}</span></span>
                     <div class="mui-media-body">Delivered</div>
                 </a>
             </li>

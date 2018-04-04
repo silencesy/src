@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>th-Coupons</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+	<style>
+		body {
+			background-color: #fff;
+		}
+		.table-card .tab-container >ul {
+			background: rgba(0,0,0,0);
+			
+		}
+		.mui-coupons-content .login-code input {
+			border: 1px solid rgba(0,0,0,0);
+		}
+		.mui-coupons-content .login-code {
+			float: left;
+    		width: 68%;
+		}
+		.mui-coupons-content #newList > .clearfix {
+			padding: 0 15px;
+		}
+		.mui-coupons-content .login-btn {
+			padding: 0;
+		    float: left;
+		    padding-left: 15px;
+		    box-sizing: border-box;
+		    width: 32%;
+		}
+		.mui-coupons-content .login-btn button {
+   			padding: 6px 15px;
+   			background: #b8b8b8;
+   			height: 39px;
+   			width: 100%;
+		}
+		.coupons-card > div {
+			background: #fff;
+			padding: 15px;
+		}
+		.coupons-card .card-up {
+			background: #fce6e3;
+			position: relative;
+			font-size: 14px;
+			padding: 10px;
+		}  
+		.coupons-card .card-up-o {
+			background: #e4e4e4;
+		}
+		.coupons-card .card-up em {
+			font-size: 24px;
+			font-weight: 600;
+		}
+		.coupons-card .card-up > div > span {
+			float: left;
+			width: 17%;
+			padding-top: 11px;
+		}
+		.coupons-card .card-up > div > p {
+			float: left;
+			line-height: 44px;
+		}
+		.coupons-card .card-up > div > a {
+			float: left;
+			width: 27%;
+			background: #f6442b;
+			color: #fff;
+			padding: 3px 3px;
+			margin-top: 9px;
+    		border-radius: 3px;
+    		text-align: center;
+		}
+		.coupons-card .card-up > div > .card-a-o {
+			background: #b8b8b8;
+		}
+		.coupons-card .card-up b {
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.coupons-card .card-down {
+			background: #fea598;
+			color: #fff;
+			padding: 10px;
+			overflow: hidden;
+			font-size: 14px;
+		}
+		.coupons-card .card-down-o {
+			background: #b8b8b8;
+		}
+		.coupons-card .card-down span:nth-of-type(1) {
+			float: left;
+		}
+		.coupons-card .card-down span:nth-of-type(2) {
+			float: right;
+		}
+		.coupons-card .card-up img {
+			position: absolute;
+			width: 100%;
+		    bottom: 0;
+		    right: 0;
+		}
+		.table-card .tab-con {
+			padding-top: 0px;
+		}
+		.get-btn {
+			display: inline-block;
+			width: 50%;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			color: #fff;
+			background-color: #f6442b;
+			margin: 0 auto;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout favourite-layout">
+		<div class="mui-content mui-coupons-content">
+		    <div class="table-card">
+		        <div class="tab-con">
+		            <div class="tab-on products tab-container">
+		                <div class="save-pro-ul" id="newList">
+							<div class="coupons-card" id="couponBox">
+								<!-- <div>
+									<div class="card-up">
+										<div class="clearfix">
+											<span style="color: #f6442b;">¥<em> 50</em></span>	 
+											<p>
+												<span>Avalible for consumption above ¥ 99</span>
+											</p>
+										</div>
+										<img src="./static/images/line.jpg" alt="">
+									</div>
+									<div class="card-down">
+										<span>2018.03.31－2018.05.31</span>
+										<span>Specified goods</span>
+									</div>
+								</div> -->
+							</div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<script id="coupons" type="text/html">
+		{{each couponsList as val i}}
+			<div>
+			<div class="card-up">
+				<div class="clearfix">
+					<span style="color: #f6442b;">¥ <em>{{val.reduce_money}}</em></span>	 
+					<p>
+						<span>Avalible for consumption above ¥ {{val.floor_money}}</span>
+					</p>
+				</div>
+				<img src="./static/images/line.jpg" alt="">
+			</div>
+			<div class="card-down">
+				<span>{{val.start_time}} - {{val.end_time}}</span>
+				<span>Specified goods</span>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script src="api/testOrFormal.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script>
+		(function(mui) {
+			var token = window.localStorage.getItem('token') || null;
+			getcouponsData ();
+			function getcouponsData () {
+				$.ajax({
+					beforeSend: function(request) {
+	                    request.setRequestHeader("TOKEN", token);
+	                },
+					url: csOrzs + '/Api/Coupon/couponList',
+					type: 'POST'
+				})
+				.done(function(data) {
+					console.log(data);
+					if (data.code == 1) {
+						var couponsData = data.data;
+						var couponsList2 = {"couponsList":couponsData};
+						var couponsHtml = template('coupons', couponsList2);
+						$('#couponBox').append(couponsHtml);
+					} else {
+						mui.toast("Network error, please try again!");
+					}
+				})
+				.fail(function() {
+					mui.toast("Network error, please try again!");
+				});
+			}
+		})(mui);
+	</script>
+</body>
+</html>

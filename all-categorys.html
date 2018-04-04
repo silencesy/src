@@ -9,7 +9,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="./static/css/mui.min.css">
 		<link rel="stylesheet" href="./static/css/style.css">
-		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_0r1b8oe2twukgldi.css">
+		<!-- 字体图标 -->
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xye57roo0uul3di.css">
 		<style>
 			html,
 			body {
@@ -18,12 +19,12 @@
 			/*p {
 				text-indent: 22px;
 			}*/
-			span.mui-icon {
+			/*span.mui-icon {
 				font-size: 14px;
 				color: #007aff;
 				margin-left: -15px;
 				padding-right: 10px;
-			}
+			}*/
 			.mui-off-canvas-left {
 				background-color: #fff;
 			}
@@ -76,15 +77,48 @@
 			.activesave {
 				color: #f6442b !important;
 			}
+			#CategoriesList {
+				margin-bottom: 50px;
+			}
+			#offCanvasContentScroll {
+				padding-bottom: 50px;
+			}
+			.mui-scroll-wrapper {
+				right: 0;
+				margin: auto;
+				max-width: 640px;
+			}
 		</style>
 	</head>
 
 	<body>
+		<nav class="mui-bar mui-bar-tab" id="bottomBar">
+			<a class="mui-tab-item" id="homePage">
+				<span class="mui-icon iconfont icon-shanghu1"></span>
+				<span class="mui-tab-label">Home</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="Categories">
+				<span class="mui-icon iconfont icon-fenlei1"></span>
+				<span class="mui-tab-label">Categories</span>
+			</a>
+			<a class="mui-tab-item" id="Guide">
+				<span class="mui-icon iconfont icon-wenzhang"></span>
+				<span class="mui-tab-label">Guide</span>
+			</a>
+			<a class="mui-tab-item" id="carPage">
+				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+				<span class="mui-tab-label">Cart</span>
+			</a>
+			<a class="mui-tab-item" id="mePage">
+				<span class="mui-icon iconfont icon-me"></span>
+				<span class="mui-tab-label">My Account</span>
+			</a>
+		</nav>
 		<div id="offCanvasWrapper" class="all-category-flag mui-off-canvas-wrap mui-draggable">
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
 				<div id="offCanvasSideScroll">
-					<div class="mui-scroll-wrapper">
+					<div class="mui-scroll-wrapper" id="SideScrollWrapper">
 						<div class="mui-scroll">
 							<ul class="mui-table-view" id="CategoriesList">
 								<!-- <li class="mui-table-view-cell" cat_id="1">
@@ -139,7 +173,7 @@
 		    {{each categorysList as val}}
 		    	<li class="waterfall">
 					<a href="product-detail.html?productid={{val.id}}">
-						<img class="lazy" src="{{val.coverpic}}" />
+						<img data-lazyload="{{val.coverpic}}" />
 						<p>{{val.goods_name}}</p>
 					</a>
 					<p class="sales-count">Sales volume : {{val.sale_count}}</p>
@@ -158,13 +192,19 @@
 		<script src="./static/js/jquery.min.js"></script>
 		<script src="./static/js/masonry.pkgd.min.js"></script>
 		<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+		<script src="./static/js/mui.lazyload.js"></script>
+		<script src="./static/js/mui.lazyload.img.js"></script>
+		<script src="./api/isLogin.js"></script>
 		<script src="./static/js/template.js"></script>
-	
+		
 		<script>
 		(function(mui) {
 			mui.ready(function() {
 				getCatoryTitle ();
-
+				var lazyLoad = mui("#listdata").imageLazyload({
+					placeholder: 'http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg',
+					destroy: false
+				});
 				// 获取数据参数
 				var categoryid =  getQueryString('categoryid') || 0;
 				var page = 0;
@@ -185,7 +225,7 @@
 				offCanvasInner.insertBefore(offCanvasSide, offCanvasInner.firstElementChild);
 				offCanvasWrapper.offCanvas().refresh();
 				// 点击a标签跳转
-				mui('body').on('tap','a',function(){document.location.href=this.href;});
+				mui('#offCanvasWrapper').on('tap','a',function(){document.location.href=this.href;});
 				// 点击分类获取数据
 				$('#CategoriesList').on('tap','.mui-table-view-cell',function(){
 					$('title').text($(this).children('a').text());
@@ -193,6 +233,9 @@
 					page = 0;
 					sort = null;
 					offCanvasWrapper.offCanvas('close');
+
+					mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
+
 					$('.waterfall').each(function(index, el) {
 		                $grid.masonry( 'remove', $(this)).masonry('layout');;
 		            });
@@ -203,7 +246,7 @@
 		            console.log($(this).attr('cat_id'));
 		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		            
 					$('#CategoriesList .mui-table-view-cell').each(function(index, el) {
 						$(this).removeClass('active');
 					});
@@ -222,6 +265,7 @@
 					}
 				});
 				function pullupRefresh() {
+
 					++page;
 					$.ajax({
 						url: csOrzs + '/Api/Archive/getList',
@@ -229,7 +273,7 @@
 						data: {
 		                        'cat_id': categoryid,
 		                        'p': page,
-		                        'pageSize': '8',
+		                        'pageSize': '9',
 		                        'sort': sort
 		                    },
 					})
@@ -249,7 +293,8 @@
 							$grid.imagesLoaded().progress( function() {
 						  		$grid.masonry();
 							});  
-							// mui('.mui-scroll-wrapper').pullRefresh().scrollTo(1, 1, 100);
+							lazyLoad.refresh(true);
+							// mui('.mui-scroll-wrapper').pullRefresh().scrollTo(0, 0, 1);
 						} else {
 							mui('#offCanvasContentScroll').pullRefresh().endPullupToRefresh(true);
 							mui.toast("Network error, please try again!");
@@ -262,9 +307,13 @@
 					});
 				}
 				// 开启抽屉栏滚动区域
-				mui('.mui-scroll-wrapper').scroll({
-					deceleration: 0.0030 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				mui('#SideScrollWrapper').scroll({
+					deceleration: 0.0006 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 				});
+
+				// mui('.mui-scroll-wrapper').scroll({
+				// 	deceleration: 0.0006 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				// });
 				// mui('body').on('tap','.price-box',function(){
 			 //        if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == false && $('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == false) {
 			 //            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
@@ -275,7 +324,7 @@
 			 //            });
 			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 			 //        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
 			 //            $('.rank-jiantou2 > span').each(function(index, el) {
 			 //                $(this).removeClass('activesave');
@@ -288,7 +337,7 @@
 			 //            });
 			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 			 //        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
 			 //            $('.rank-jiantou2 > span').each(function(index, el) {
 			 //                $(this).removeClass('activesave');
@@ -301,7 +350,7 @@
 			 //            });
 			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 			 //        }
 			        
 			 //    });
@@ -317,7 +366,7 @@
 		  //           });
 		  //           mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 		  //           mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-		  //           mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		  //           mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 			 //    });
 			// 价格排序
             mui('body').on('tap','.price-box',function(){
@@ -328,12 +377,13 @@
 		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
 		            sort = 2;
 		            page = 0;
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 		            $('.waterfall').each(function(index, el) {
 		                $grid.masonry( 'remove', $(this)).masonry('layout');;
 		            });
 		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		            
 		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
 		        	console.log(2);
 		            $('.rank-jiantou2 > span').each(function(index, el) {
@@ -342,12 +392,13 @@
 		            $('.icon-xiangshangjiantou-copy-copy-copy-copy').addClass('activesave');
 		            sort = 1;
 		            page = 0;
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 		            $('.waterfall').each(function(index, el) {
 		                $grid.masonry( 'remove', $(this)).masonry('layout');;
 		            });
 		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		            
 		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
 		        	console.log(3);
 		            $('.rank-jiantou2 > span').each(function(index, el) {
@@ -356,12 +407,13 @@
 		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
 		            sort = 2;
 		            page = 0;
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 		            $('.waterfall').each(function(index, el) {
 		                $grid.masonry( 'remove', $(this)).masonry('layout');;
 		            });
 		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		            
 		        }
 		    });
 		    // 销量排序
@@ -374,12 +426,13 @@
 	            });
 		    	sort = 3;
 	            page = 0;
+	            mui('#offCanvasContentScroll').pullRefresh().scrollTo(0, 0, 1);
 	            $('.waterfall').each(function(index, el) {
 	                $grid.masonry( 'remove', $(this)).masonry('layout');;
 	            });
 	            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
 	            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
-	            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+	            
 		    });
 			// 获取分类信息
 			function getCatoryTitle () {

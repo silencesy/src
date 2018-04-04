@@ -12,43 +12,63 @@
 	<link rel="stylesheet" type="text/css" href="./static/css/mui.poppicker.css"/>
 	<link rel="stylesheet" href="./static/css/style.css">
 	<!-- 字体图标 -->
-	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_ousndy8ej1exw29.css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xye57roo0uul3di.css">
+	<style>
+		
+		.mui-scroll-wrapper {
+			right: 0;
+			margin: auto;
+			max-width: 640px;
+		}
+		.hide {
+		    display: none!important;
+		}
+		#hotProductbox img {
+			width: 100%;
+		}
+	</style>
 </head>
 <body>
 	<div class="layer-box">
 		<i class="loading-icon loading-rotate"></i>
 	</div>
 	<div class="layout home-layout loading" style="visibility: hidden;" id="homePageShow">
-			<nav class="mui-bar mui-bar-tab" id="bottomBar">
-				<a class="mui-tab-item mui-active" id="homePage">
-					<span class="mui-icon iconfont icon-shanghu1"></span>
-					<span class="mui-tab-label">Home</span>
-				</a>
-				<a class="mui-tab-item" id="carPage">
-					<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
-					<span class="mui-tab-label">Cart</span>
-				</a>
-				<a class="mui-tab-item" id="mePage">
-					<span class="mui-icon iconfont icon-me"></span>
-					<span class="mui-tab-label">Me</span>
-				</a>
-				<a class="mui-tab-item" id="morePage">
-					<span class="mui-icon iconfont icon-iconfonthome"></span>
-					<span class="mui-tab-label">More</span>
-				</a>
-			</nav>
-			<div class="home-search-group">
-				<div class="clearfix">
-					<span id='showUserPicker'>All <i class="fr iconfont icon-xiangshangjiantou-copy-copy-copy"></i></span>
-					<form id="homeSearch" onsubmit="return false;" action="##">
-						<input id="searchInput" class="searchInput" type="search" placeholder="Search"/>
-						<i class="iconfont icon-sousuo"></i>
-					</form>
-				</div>
+		<nav class="mui-bar mui-bar-tab" id="bottomBar">
+			<a class="mui-tab-item mui-active" id="homePage">
+				<span class="mui-icon iconfont icon-shanghu1"></span>
+				<span class="mui-tab-label">Home</span>
+			</a>
+			<a class="mui-tab-item" id="Categories">
+				<span class="mui-icon iconfont icon-fenlei1"></span>
+				<span class="mui-tab-label">Categories</span>
+			</a>
+			<a class="mui-tab-item" id="Guide">
+				<span class="mui-icon iconfont icon-wenzhang"></span>
+				<span class="mui-tab-label">Guide</span>
+			</a>
+			<a class="mui-tab-item" id="carPage">
+				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+				<span class="mui-tab-label">Cart</span>
+			</a>
+			<a class="mui-tab-item" id="mePage">
+				<span class="mui-icon iconfont icon-me"></span>
+				<span class="mui-tab-label">My Account</span>
+			</a>
+		</nav>
+		<div class="home-search-group">
+			<div class="clearfix">
+				<span id='showUserPicker'>All <i class="fr iconfont icon-xiangshangjiantou-copy-copy-copy"></i></span>
+				<form id="homeSearch" onsubmit="return false;" action="##">
+					<input id="searchInput" class="searchInput" type="search" placeholder="Search"/>
+					<i class="iconfont icon-sousuo"></i>
+				</form>
 			</div>
-			<div id="searchBg" class="search-bg"></div>
-			<span id="backBtn" class="iconfont icon-fanhuidingbu"></span>
-			<div class="mui-content">
+		</div>
+		<div id="searchBg" class="search-bg"></div>
+		<span id="backBtn" class="iconfont icon-fanhuidingbu"></span>
+		<div class="mui-content mui-scroll-wrapper" id="homepage">
+
+			<div class="mui-scroll">
 				<!-- 首页轮播开始 -->
 				<div class="home-carousel" id="homeCarouselBox">
 				 	<div class="swiper-container home-banner-carousel">
@@ -60,89 +80,128 @@
 			    		</div>
 		    			<div class="swiper-pagination"></div>
 					</div>
+				</div>
 				<!-- 首页轮播结束 -->
-				<div class="home-section-box">
-					<div class="section-head section-head-one">
-						<span class="section-head-text">Featured shops</span>
-						<div class="home-line"></div>
-						<a href="./shop-list.html" class="home-more">More</a> 
+				<!-- deals模板开始 -->
+				<section class="home-floor-section" id="dealsbox">
+					<!-- <div class="floor-title clearfix">
+						<a href="./product-list.html?categoryid=12">
+							<img src="./static/images/deals.png" alt="">
+						</a>
 					</div>
 					<div class="home-product-carousel-box">
-						<div class="swiper-container home-product-carousel home-product-carousel1">
-					        <div class="swiper-wrapper" id="merchantsBox">
-					            <!-- <div class="swiper-slide product-lists">
-					            		<a href="./shopOwner-home.html">
-					            			<img class="lazy" data-original="./static/images/products.jpg" alt="" />
-										<p>adidas</p>
-					            		</a>
-					            </div> -->
+						<div class="swiper-container home-floor-carousel" id="dealsCarousel">
+					        <div class="swiper-wrapper" id="dealsbox">
+					            <div class="swiper-slide product-lists">
+				            		<a href="./shopOwner-home.html">
+				            			<img data-lazyload="./static/images/deals.png" alt="" />
+										<p class="sy-ellipsis-2">adidasadidasadiasdfasdfasdasadidasadidas</p>
+										<p>￥199</p>
+				            		</a>
+					            </div>
 					        </div>
-					        <!-- Add Pagination -->
 					        <div class="swiper-scrollbar"></div>
 					    </div>
-					</div>
-				</div>
+					</div> -->
+				</section>
+				<!-- deals模板结束 -->
 				<div class="home-ad" id="homeId1">
 					
 				</div>
-				<div class="home-section-box">
-					<div class="section-head">
-						<span class="section-head-text">Featured goods</span>
-						<div class="home-line home-line-two"></div>
-						<a href="./Re-products-list.html" class="home-more">More</a>
+				<!-- ticketing模板开始 -->
+				<section class="home-floor-section" id="ticketingbox">
+					<!-- <div class="floor-title clearfix">
+						<a href="./all-categorys.html?categoryid=1">
+							<img src="./static/images/ticketing.png" alt="">
+						</a>
 					</div>
-					<div class="home-product-carousel-box home-product-carousel-box2">
-						<div class="swiper-container home-product-carousel home-product-carousel2">
-					        <div class="swiper-wrapper" id="productBox">
-					            <!-- <div class="swiper-slide product-lists">
-					            		<a href="./product-detail.html">
-					            			<img class="lazy" data-original="./static/images/products.jpg" alt="" />
-											<p>adidasadidasaddidasadidasaddidasadidasaddidasadidasaddidasadidasadidasadidasadidasadidasadidas</p>
-											<p>￥430.50</p>
-											<p>￥349.50</p>
-					            		</a>
-					            </div> -->
+					<div class="home-product-carousel-box">
+						<div class="swiper-container home-floor-carousel" id="ticketingCarousel">
+					        <div class="swiper-wrapper" id="ticketingbox">
+					            
 					        </div>
-					        <!-- Add Pagination -->
 					        <div class="swiper-scrollbar"></div>
 					    </div>
-					</div>
-				</div>
+					</div> -->
+				</section>
+				<!-- ticketing模板结束 -->
 				<div class="home-ad" id="homeId2">
 					
 				</div>
-				<div class="home-section-box">
-					<div class="section-head">
-						<span class="section-head-text">Editor’s pick</span>
-						<div class="home-line home-line-three"></div>
-						<a href="./article-list.html" class="home-more">More</a>
+				<!-- 文章推荐开始 -->
+				<section class="home-floor-section" id="articlebox">
+					<!-- <div class="floor-title clearfix">
+						<a href="./article-list.html">
+							<img src="./static/images/editor's-pick.png" alt="">
+						</a>
 					</div>
-					<ul class="mui-table-view home-pick-list" id="articleBox">
-						<!-- <a href="article-details.html">
+					<ul class="mui-table-view home-pick-list" >
+						<a href="article-details.html">
 							<li class="mui-table-view-cell">
 								<div class="home-pick-img">
-									<img class="list-li-img lazy" data-original="./static/images/home-product1.jpg">
+									<img class="list-li-img lazy" src="http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg">
 								</div>
 								<div class="home-pick-info">
-									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<p class="sy-ellipsis-2" >itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
 									<em class="date">2017-10-24</em>
 								</div>
 							</li>
-						</a> -->		
-					</ul>
-				</div>
+						</a>
+					</ul> -->
+				</section>
+				<!-- 文章推荐开始 -->
 				<div class="home-ad" id="homeId3">
 					
 				</div>
-				<div class="classification">
-					<ul class="mui-table-view" id="categoryBox">
-						<!-- <li class="mui-table-view-cell">
-							<a href="#">
-								<img class="lazy" data-original="./static/images/home-class1.jpg" alt="" />
-							</a>
-						</li> -->
-					</ul>
-				</div>
+				<!-- 推荐商品开始 -->
+				<section class="home-floor-section" id="featureProductsbox">
+					<!-- <div class="floor-title clearfix">
+						<a href="./Re-products-list.html"><img src="./static/images/freatured-products.png" alt=""></a>
+					</div>
+					<div class="home-product-carousel-box">
+						<div class="swiper-container home-floor-carousel" id="featureProductsCarousel">
+					        <div class="swiper-wrapper"	>
+					            
+					        </div>
+					        <div class="swiper-scrollbar"></div>
+					    </div>
+					</div> -->
+				</section>
+				<!-- 推荐商品结束 -->
+				<!-- 推荐商户开始 -->
+				<section class="home-floor-section" id="shopbox">
+					<!-- <div class="floor-title clearfix">
+						<a href="./shop-list.html"><img src="./static/images/freatured-shops.png" alt=""></a>
+					</div>
+					<div class="home-product-carousel-box">
+						<div class="swiper-container home-floor-carousel" id="shopCcarousel">
+					        <div class="swiper-wrapper" >
+					            <div class="swiper-slide product-lists">
+				            		<a href="./shopOwner-home.html">
+				            			<img data-lazyload="http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg" alt="" />
+										<p>shop name</p>
+				            		</a>
+					            </div>
+					        </div>
+					        <div class="swiper-scrollbar"></div>
+					    </div>
+					</div> -->
+				</section>
+				<!-- 推荐商户结束 -->
+				<section class="home-floor-section home-product-carousel-box">
+					<div class="floor-title clearfix">
+						<img id="hotTitileimg" src="#" alt="">
+					</div>
+					<ul class="mui-table-view mui-grid-view" id="hotProductbox">
+				        <!-- <li class="mui-table-view-cell product-lists mui-media mui-col-xs-4">
+				            <a href="#">
+				                <img class="mui-media-object" src="../images/shuijiao.jpg">
+				                <p class="mui-media-body">幸福就是可以一起睡觉</p>
+				                <p>￥{{val.goods_price}}</p>
+				            </a>
+				        </li> -->
+				    </ul>  
+				</section>
 			</div>
 		</div>
 	</div>
@@ -166,80 +225,137 @@
 	    	</div>
 	    {{/each}}
 	</script>
- 
-	<!-- 推荐商户 -->
-	<script id="merchants" type="text/html">
-	    {{each merchantsList as val}}
-	    	<div class="swiper-slide product-lists">
-        		<a href="./shopOwner-home.html?merchantsid={{val.set_id}}">
-        			<img class="lazy" data-original="{{val.set_img}}" alt="" />
-					<p>{{val.merchant_name}}</p>
-        		</a>
-            </div>
-	    {{/each}}
+	<!-- deals模板 -->
+	<script id="deals" type="text/html">
+		<div class="floor-title clearfix">
+			<a href="./product-list.html?categoryid=12">
+				<img src="{{dealsList.image}}" alt="">
+			</a>
+		</div>
+		<div class="home-product-carousel-box">
+			<div class="swiper-container home-floor-carousel" id="dealsCarousel">
+		        <div class="swiper-wrapper">
+		           	{{each dealsList.list as val i}}
+						<div class="swiper-slide product-lists">
+				    		<a href="./product-detail.html?productid={{val.id}}">
+				    			<img data-lazyload="{{val.set_img}}" alt="" />
+								<p class="">{{val.goods_name}}</p>
+								<p>￥{{val.goods_price}}</p>
+				    		</a>
+				        </div>
+			        {{/each}}	
+		        </div>
+		        <!-- Add Pagination -->
+		        <div class="swiper-scrollbar"></div>
+		    </div>
+		</div>
+			
 	</script>
-
-	<!-- 推荐商品模板 -->
-	<script id="products" type="text/html">
-	    {{each productList as val}}
-	    	<div class="swiper-slide product-lists">
-        		<a href="product-detail.html?productid={{val.set_id}}">
-        			<img class="lazy" data-original="{{val.set_img}}" alt="" />
-					<p>{{val.goods_name}}</p>
-					{{if val.goods_sale_price}}
-					<p>￥{{val.goods_price}}</p>
-					<p>￥{{val.goods_sale_price}}</p>
-					{{else}}
-					<p></p>
-					<p>￥{{val.goods_price}}</p>
-					{{/if}}
-        		</a>
-            </div>
-	    {{/each}}
+	<!-- ticketing模板 -->
+	<script id="ticketing" type="text/html">
+		<div class="floor-title clearfix">
+			<a href="./all-categorys.html?categoryid=1">
+				<img src="{{ticketingList.image}}" alt="">
+			</a>
+		</div>
+		<div class="home-product-carousel-box">
+			<div class="swiper-container home-floor-carousel" id="ticketingCarousel">
+		        <div class="swiper-wrapper">
+		            {{each ticketingList.list as val i}}
+					<div class="swiper-slide product-lists">
+			    		<a href="./product-detail.html?productid={{val.id}}">
+			    			<img data-lazyload="{{val.coverpic}}" alt="" />
+							<p class="">{{val.goods_name}}</p>
+							<p>￥{{val.goods_price}}</p>
+			    		</a>
+			        </div>
+			        {{/each}}
+		        </div>
+		        <div class="swiper-scrollbar"></div>
+		    </div>
+		</div>
+				
 	</script>
-
-	<!-- 推荐文本模板 -->
-	<script id="articles" type="text/html">
-	    {{each articlesList as val}}
-	    	<a href="article-details.html?articlesid={{val.set_id}}">
+	<!-- 文章推荐模板 -->
+	<script id="article" type="text/html">
+		<div class="floor-title clearfix">
+			<a href="./article-list.html">
+				<img src="{{articleList.image}}" alt="">
+			</a>
+		</div>
+		<ul class="mui-table-view home-pick-list" >
+			{{each articleList.list as val i}}
+			<a href="article-details.html?articlesid={{val.set_id}}">
 				<li class="mui-table-view-cell">
 					<div class="home-pick-img">
-						<img class="list-li-img lazy" data-original="{{val.set_img}}">
+						<img data-lazyload="{{val.set_img}}">
 					</div>
-					<div class="home-pick-info">
-						<p>{{val.article_name}}</p>
+					<div class="home-pick-info ">
+						<p class="" >{{val.article_name}}</p>
+						<p class="descript" >{{val.description}}</p>
 						<em class="date">{{val.create_time}}</em>
 					</div>
 				</li>
 			</a>
-	    {{/each}}
+			{{/each}}
+		</ul>
 	</script>
-	<!-- 商品分类模板 -->
-	<!-- deals分类模板 -->
-	<script id="deals" type="text/html">
-    	<li class="mui-table-view-cell">
-			<a href="./product-list.html?categoryid={{set_id}}">
-				<img class="lazy" data-original="{{image}}" alt="" />
-			</a>
-		</li>
+	<!-- 推荐商品模板 -->
+	<script id="featureProducts" type="text/html">
+
+		<div class="floor-title clearfix">
+			<a href="./Re-products-list.html"><img src="{{productList.image}}" alt=""></a>
+		</div>
+		<div class="home-product-carousel-box">
+			<div class="swiper-container home-floor-carousel" id="featureProductsCarousel">
+		        <div class="swiper-wrapper"	>
+		            {{each productList.list as val i}}
+					<div class="swiper-slide product-lists">
+			    		<a href="./product-detail.html?productid={{val.id}}">
+			    			<img data-lazyload="{{val.set_img}}" alt="" />
+							<p class="">{{val.goods_name}}</p>
+							<p>￥{{val.goods_price}}</p>
+			    		</a>
+			        </div>
+			        {{/each}}
+		        </div>
+		        <div class="swiper-scrollbar"></div>
+		    </div>
+		</div>
+				
 	</script>
-	<!-- shoplist分类模板 -->
-	<script id="allMerchanttemplate" type="text/html">
-    	<li class="mui-table-view-cell">
-			<a href="search-result.html?searchdata=">
-				<img class="lazy" data-original="{{image}}" alt="" />
-			</a>
-		</li>
+	<!-- 商户推荐模板 -->
+	<script id="shop" type="text/html">
+		<div class="floor-title clearfix">
+			<a href="./shop-list.html"><img src="{{shopList.image}}" alt=""></a>
+		</div>
+		<div class="home-product-carousel-box">
+			<div class="swiper-container home-floor-carousel" id="shopCarousel">
+		        <div class="swiper-wrapper" >
+		            {{each shopList.list as val i}}
+					<div class="swiper-slide product-lists">
+						<a href="./shopOwner-home.html?merchantsid={{val.set_id}}">
+							<img data-lazyload="{{val.set_img}}" alt="" />
+							<p style="min-height: 22px;height: 22px;">{{val.merchant_name}}</p>
+						</a>
+					</div>
+					{{/each}}
+		        </div>
+		        <div class="swiper-scrollbar"></div>
+		    </div>
+		</div>
 	</script>
-	<!-- 商品分类模板 -->
-	<script id="categorys" type="text/html">
-	    {{each categoryList as val}}
-	    	<li class="mui-table-view-cell">
-				<a href="./all-categorys.html?categoryid={{val.set_id}}">
-					<img class="lazy" data-original="{{val.set_img}}" alt="" />
-				</a>
-			</li>
-	    {{/each}}
+	<!-- hotproduct模板 -->
+	<script id="hotProduct" type="text/html">
+		{{each hotProductList as val i}}
+			<li class="mui-table-view-cell product-lists mui-media mui-col-xs-4">
+	            <a href="./product-detail.html?productid={{val.id}}">
+	                <img data-lazyload="{{val.set_img}}">
+	                <p class="mui-media-body">{{val.goods_name}}</p>
+	                <p>￥{{val.goods_price}}</p>
+	            </a>
+	        </li>
+		{{/each}}
 	</script>
 	<script src="./api/testOrFormal.js"></script>
 	<script src="./static/js/mui.min.js"></script>
@@ -248,7 +364,8 @@
 	<script src="./static/js/template.js"></script>
 	<script src="./static/js/swiper.min.js"></script>
 	<script src="./static/js/jquery.min.js"></script>
-	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/mui.lazyload.js"></script>
+	<script src="./static/js/mui.lazyload.img.js"></script>
 	<script src="./api/isLogin.js"></script>
 	<script src="./api/homePage.js"></script>
 

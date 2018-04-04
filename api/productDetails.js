@@ -396,6 +396,7 @@
 	// 	$.ajax({
 	// 		url: csOrzs + '/Api/Wx/wxShare',
 	// 		type: 'POST',
+	// 		async: false,
 	// 		data: {goods_id: productId},
 	// 	})
 	// 	.done(function(data) {
@@ -408,7 +409,6 @@
 	// }
 
 	// function share (data) {
-	// 	console.log(typeof(data.signPackage.timestamp));
 	// 	wx.config({
 	// 	debug:false,// 是否开启调试模式
 	// 	appId:data.signPackage.appId,// 必填，微信号AppID
